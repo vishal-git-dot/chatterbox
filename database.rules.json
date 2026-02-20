@@ -1,0 +1,98 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['id', 'email', 'displayName', 'status', 'lastSeen'])",
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 50"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().length <= 255"
+        },
+        "status": {
+          ".validate": "newData.isString() && (newData.val() === 'online' || newData.val() === 'offline' || newData.val() === 'away')"
+        }
+      }
+    },
+    "messages": {
+      "$chatId": {
+        ".read": "auth != null && ($chatId.contains(auth.uid))",
+        "$messageId": {
+          ".write": "auth != null && ($chatId.contains(auth.uid))",
+          ".validate": "newData.hasChildren(['senderId', 'receiverId', 'text', 'timestamp', 'read'])",
+          "senderId": {
+            ".validate": "newData.val() === auth.uid || (data.exists() && data.val() === newData.val())"
+          },
+          "text": {
+            ".validate": "newData.isString() && newData.val().length <= 10000"
+          },
+          "editedAt": {
+            ".validate": "data.parent().child('senderId').val() === auth.uid"
+          },
+          "deleted": {
+            ".validate": "data.parent().child('senderId').val() === auth.uid && newData.val() === true"
+          }
+        }
+      }
+    },
+    "contacts": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$contactId": {
+          ".write": "auth != null && (auth.uid === $uid || auth.uid === $contactId)"
+        }
+      }
+    },
+    "contactRequests": {
+      ".read": "auth != null",
+      "$requestId": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['fromUserId', 'toUserId', 'status', 'timestamp'])",
+        "fromUserId": {
+          ".validate": "!data.exists() ? newData.val() === auth.uid : true"
+        },
+        "status": {
+          ".validate": "newData.isString() && (newData.val() === 'pending' || newData.val() === 'accepted' || newData.val() === 'declined')"
+        }
+      }
+    },
+    "blocked": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "typing": {
+      "$typingKey": {
+        ".read": "auth != null && $typingKey.contains(auth.uid)",
+        ".write": "auth != null && $typingKey.beginsWith(auth.uid)"
+      }
+    },
+    "viewing": {
+      "$viewingKey": {
+        ".read": "auth != null && $viewingKey.contains(auth.uid)",
+        ".write": "auth != null && $viewingKey.beginsWith(auth.uid)"
+      }
+    },
+    "notifications": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$notificationId": {
+          ".write": "auth != null",
+          "read": {
+            ".write": "auth != null && auth.uid === $uid"
+          }
+        }
+      }
+    },
+    "publicKeys": {
+      "$uid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.isString() && newData.val().length <= 2000"
+      }
+    }
+  }
+}
