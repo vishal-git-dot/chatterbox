@@ -17,17 +17,12 @@
 <br/>
 
 <p align="center">
-  <a href="https://lovable.dev/projects/d15f935a-88b5-495e-a0c6-bd7bd23a5012"><img src="https://img.shields.io/badge/▶_Live_Demo-06B6D4?style=for-the-badge&logoColor=white" /></a>
-  &nbsp;
-  <a href="https://docs.lovable.dev"><img src="https://img.shields.io/badge/📖_Docs-7C3AED?style=for-the-badge&logoColor=white" /></a>
-  &nbsp;
-  <a href="https://github.com/user/chatterbox/issues"><img src="https://img.shields.io/badge/🐛_Report_Bug-EF4444?style=for-the-badge&logoColor=white" /></a>
+  <a href="https://github.com/vishal-git-dot/chatterbox/issues"><img src="https://img.shields.io/badge/🐛_Report_Bug-EF4444?style=for-the-badge&logoColor=white" /></a>
 </p>
 
 <p align="center">
   <img alt="status" src="https://img.shields.io/badge/status-active-22c55e?style=flat-square" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-7c3aed?style=flat-square" />
-  <img alt="built with" src="https://img.shields.io/badge/built%20with-Lovable-06b6d4?style=flat-square" />
   <img alt="mobile" src="https://img.shields.io/badge/mobile-optimized-f59e0b?style=flat-square" />
   <img alt="encryption" src="https://img.shields.io/badge/e2e-encrypted-22c55e?style=flat-square" />
   <img alt="security" src="https://img.shields.io/badge/security-hardened-22c55e?style=flat-square" />
